@@ -1,0 +1,11 @@
+Package: xe-devel
+Version: 0.1.1
+Section: misc
+Priority: extra
+Architecture: all
+Maintainer: Jakobus Schürz <jakob@xundeenergie.at>
+Homepage: http://github.com/xundeenergie/xe-devel
+Provides: xe-devel
+Depends: 
+Recommends: 
+Description: Some devel-scripts for Xunde Energie

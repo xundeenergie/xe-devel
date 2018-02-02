@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -d /tmp/.vbox-$1-ipc ]; then
+    export VBOX_IPC_SOCKETID="$1"
+    VMS=`VBoxManage --nologo list runningvms 2>/dev/null`
+    if [ $? -eq 0 -a -n "$VMS" ]; then
+        VMS=`echo "$VMS" | sed -e 's/^".*".*{\(.*\)}/\1/'`
+        for v in $VMS; do
+            VBoxManage --nologo controlvm $v $2
+            sleep $3
+        done
+    fi
+fi
