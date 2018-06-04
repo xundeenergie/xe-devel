@@ -65,6 +65,7 @@ set_global_variables() {
     # set up an associative array with key = component and value = method + git repo
     declare -Ag components
     components=( [libmypaint]="make https://github.com/mypaint/libmypaint.git" 
+                 [mypaint-brushes]="make https://github.com/Jehan/mypaint-brushes.git"
                  [babl]="make git://git.gnome.org/babl"
                  [gegl]="make git://git.gnome.org/gegl"
                  [gimp]="make git://git.gnome.org/gimp"
@@ -75,7 +76,7 @@ install_global_dependencies() {
     # Get dependencies (hopefully :) )
     sudo apt-get update &&
     sudo apt-get install --yes --no-install-recommends "${required_dependencies[@]}" "${optional_dependencies[@]}" 
-    # sudo apt-get build-dep -y babl gegl gimp || die
+    sudo apt-get build-dep -y babl gegl gimp || die
 }
 
 setup_environment_for_local_builds() {
@@ -173,7 +174,7 @@ build_and_install_component() {
 build_and_install_local_components() {
     # build and install components
     local component
-    for component in libmypaint babl gegl gimp
+    for component in libmypaint mypaint-brushes babl gegl gimp
     do
         if ! build_and_install_component $component
         then
